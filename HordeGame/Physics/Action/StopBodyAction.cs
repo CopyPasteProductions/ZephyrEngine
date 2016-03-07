@@ -12,7 +12,7 @@ namespace HordeGame.Physics.Action
     {
         public void performAction(ref IMoveable c)
         {
-            
+            c.stopMovement();
         }
     }
 }

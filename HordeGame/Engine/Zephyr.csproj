@@ -55,9 +55,10 @@
     <Compile Include="Physics\Collision\CollisionBody.cs" />
     <Compile Include="Physics\Collision\ICollidable.cs" />
     <Compile Include="Physics\Collision\RectangleCollisionBody.cs" />
+    <Compile Include="Physics\GameWorldObject.cs" />
     <Compile Include="Physics\MovableRectangleCollisionBody.cs" />
     <Compile Include="Physics\Movement\IMoveable.cs" />
-    <Compile Include="Physics\PhysicsProcessor.cs" />
+    <Compile Include="Physics\Process\PhysicsProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateManagement\EntityManagment\EntityManager.cs" />
     <Compile Include="StateManagement\EntityManagment\Entity\AbstractEntity.cs" />
