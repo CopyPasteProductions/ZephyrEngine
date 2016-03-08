@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Engine.Physics.Collision
+namespace Engine.Physics.Collision.Interfaces
 {
     /// <summary>
     /// This inteface will define the behavior of collisions
@@ -14,7 +14,7 @@ namespace Engine.Physics.Collision
     /// </summary>
     public interface ICollidable
     {
-        bool isCollidable();
+        bool isActive();
 
         bool checkCollision(ICollidable c);
 

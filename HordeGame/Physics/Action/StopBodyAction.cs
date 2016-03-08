@@ -5,14 +5,17 @@ using System.Text;
 using Engine.Physics.Collision;
 using Engine.Physics.Action;
 using Engine.Physics.Movement;
+using Engine.Physics.Action.Interfaces;
+using Engine.Physics.Collision.Interfaces;
+using Microsoft.Xna.Framework;
 
 namespace HordeGame.Physics.Action
 {
     public class StopBodyAction : IAction
     {
-        public void performAction(ref IMoveable c)
+        public void performAction(CollisionBody c, GameTime gameTime)
         {
-            c.stopMovement();
+            throw new NotImplementedException();
         }
     }
 }

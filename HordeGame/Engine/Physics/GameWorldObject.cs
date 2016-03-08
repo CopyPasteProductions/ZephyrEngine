@@ -4,41 +4,83 @@ using System.Linq;
 using System.Text;
 using Engine.Physics.Collision;
 using Microsoft.Xna.Framework;
+using Engine.Physics.Movement;
+using Engine.Physics.Collision.Interfaces;
+using Engine.Physics.Action.Interfaces;
 
 namespace Engine.Physics
 {
-    public class GameWorldObject : ICollidable
+    /// <summary>
+    /// Game world object is the game world representation of a component
+    /// </summary>
+    public class GameWorldObject : IPhysics
     {
+        CollisionBody c;
 
-        MovableRectangleCollisionBody phyicalPresence;
+        IMovement movement;
 
-        public GameWorldObject(Point topLeft, Point widthHeight, bool col, Vector2 defaultMovement)
+        public bool Enabled
         {
-            Rectangle r = new Rectangle(topLeft, widthHeight);
-            phyicalPresence = new MovableRectangleCollisionBody(r, col, defaultMovement);
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
-
-
-
-        public bool checkCollision(ICollidable c)
+        public int UpdateOrder
         {
-            throw new NotImplementedException();
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public CollisionBody getCollisionBody()
+        public event EventHandler<EventArgs> EnabledChanged;
+        public event EventHandler<EventArgs> UpdateOrderChanged;
+
+        public void processFrame(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            if (movement.hasNextAction())
+            {
+                movement.processNextAction(c, gameTime);
+            }
+            else
+            {
+                //otherwise do standard movement
+                c.move();
+            }
+
         }
 
-        public bool isCollidable()
+        public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            //TODO make sure it doesn't update more than 60 times per second
+            processFrame(gameTime);
         }
 
-        public void moveBody(Vector2 movement)
+        public void addMovement(IMovement m)
         {
-            throw new NotImplementedException();
+            foreach (IAction a in m.getMembers())
+            {
+                movement.addAction(a);
+            }
+        }
+
+        
+
+        public CollisionBody getCollisonBody()
+        {
+            return c;
+        }
+
+        public void endCurrentMovement()
+        {
+            movement.clear();
+        }
+
+        public void setMovementSeq(IMovement m)
+        {
+            movement = m;
         }
     }
 }

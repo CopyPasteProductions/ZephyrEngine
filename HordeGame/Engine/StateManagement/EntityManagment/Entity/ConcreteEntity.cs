@@ -25,7 +25,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
 
         IDrawable drawable;
         IUpdateable updatable;
-        ICollidable gameWorldRepresentation;
+        IPhysics gameWorldRepresentation;
 
         //encapsulations
         public IDrawable Drawable
@@ -54,7 +54,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
             }
         }
 
-        public ICollidable Collidable
+        public IPhysics Collidable
         {
             get
             {
@@ -67,7 +67,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
             }
         }
 
-        public ConcreteEntity(IDrawable drwbl, IUpdateable updble, ICollidable colidble)
+        public ConcreteEntity(IDrawable drwbl, IUpdateable updble, IPhysics colidble)
         {
             //pretty standard stuff here
             Drawable = drwbl;

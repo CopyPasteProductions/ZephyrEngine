@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Engine.Physics.Collision.Interfaces;
 
 namespace Engine.Physics.Collision
 {
-    public class RectangleCollisionBody : CollisionBody
+    public class SimpleCollisionBody : CollisionBody
     {
         protected Rectangle body;
-        
+        Vector2 acceleration;
+
         bool collidable;
-        public RectangleCollisionBody(Rectangle body, bool collidable)
+        public SimpleCollisionBody(Rectangle body, bool collidable)
         {
             this.body = body;
             this.collidable = collidable;
@@ -56,6 +58,37 @@ namespace Engine.Physics.Collision
             }
         }
 
-       
+        public Vector2 getAcceleration()
+        {
+            return acceleration;
+        }
+
+        public void setAcceleration(Vector2 moveVector)
+        {
+            acceleration = moveVector;
+        }
+
+        public void resetAcceleration()
+        {
+            acceleration = Vector2.Zero;
+        }
+
+        public void move()
+        {
+            //shift the top left based on the acceleration
+            body.X += (int)acceleration.X;
+            body.Y += (int)acceleration.Y;
+        }
+
+        public void addAcceleration(Vector2 accelerationFactor)
+        {
+            acceleration = Vector2.Add(acceleration, accelerationFactor);
+        }
+
+        public void setPosition(Point targetLocation)
+        {
+            body.X = targetLocation.X;
+            body.Y = targetLocation.Y;
+        }
     }
 }

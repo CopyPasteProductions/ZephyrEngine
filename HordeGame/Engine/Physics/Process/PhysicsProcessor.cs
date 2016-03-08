@@ -18,10 +18,13 @@ namespace Engine.Physics.Process
 
         //it should keep track of the environment items that effect the processing of physics events.   
 
-        void processMovingObjects();
+        void processFrame();
 
-        //void process(List<CollisionBody> )
+        void registerPhysicsObject(ref GameWorldObject o);
 
+        void removePhysicsObject(int id);
+
+        void clear();
 
     }
 }
