@@ -15,7 +15,11 @@ namespace Engine.Physics
     /// </summary>
     public class GameWorldObject : IPhysics
     {
+        int id;
+
         CollisionBody c;
+
+        IOnCollision onCol;
 
         IMovement movement;
 
@@ -32,6 +36,19 @@ namespace Engine.Physics
             get
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
             }
         }
 
@@ -66,12 +83,12 @@ namespace Engine.Physics
             }
         }
 
-        
-
-        public CollisionBody getCollisonBody()
+        public bool checkCollision(ICollidable st)
         {
-            return c;
+            return c.isColliding(st.getCollisionBody());
         }
+
+     
 
         public void endCurrentMovement()
         {
@@ -81,6 +98,25 @@ namespace Engine.Physics
         public void setMovementSeq(IMovement m)
         {
             movement = m;
+        }
+
+       
+
+        public bool isActive()
+        {
+            //TODO fix thsi
+
+            return true;
+        }
+
+        public CollisionBody getCollisionBody()
+        {
+            return c;
+        }
+
+        public IOnCollision getCollisionAction()
+        {
+            return onCol;
         }
     }
 }

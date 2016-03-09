@@ -13,6 +13,47 @@ namespace Engine.Physics.Collision
         Vector2 acceleration;
 
         bool collidable;
+
+        public int Left
+        {
+            get
+            {
+                return body.Left;
+            }
+
+           
+        }
+
+        public int Right
+        {
+            get
+            {
+                return body.Right;
+            }
+
+           
+        }
+
+        public int Top
+        {
+            get
+            {
+                return body.Top;
+            }
+
+           
+        }
+
+        public int Bottom
+        {
+            get
+            {
+                return body.Bottom;
+            }
+
+            
+        }
+
         public SimpleCollisionBody(Rectangle body, bool collidable)
         {
             this.body = body;

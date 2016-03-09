@@ -2,29 +2,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Engine.Physics.Process.Interfaces;
 using Microsoft.Xna.Framework;
-using Engine.Physics.Collision;
 
 namespace Engine.Physics.Process
 {
-    public interface IPhysicsProcessor
+    public class PhysicsProcessor : IPhysicsProcessor
     {
-        //What opperations should a physics processor do?
-        //first it should collect a collision objects 
+        LinkedList<GameWorldObject> gameObjects;
 
-        //Then it should perform a step operation on all objects that can move
-        //Then it should process collision action items.  If an item has a complex action attached to it
-        //it should track that object and perform the complex actions steps.
 
-        //it should keep track of the environment items that effect the processing of physics events.   
+        public void clear()
+        {
+            gameObjects.Clear();
+        }
 
-        void processFrame();
+        public void processFrame(GameTime gameTime)
+        {
+            gameObjects.OrderBy(x => x.UpdateOrder);
 
-        void registerPhysicsObject(ref GameWorldObject o);
+            foreach (GameWorldObject g in gameObjects)
+            {
+                g.processFrame(gameTime);
+            }
 
-        void removePhysicsObject(int id);
+        }
 
-        void clear();
+        public void registerPhysicsObject(ref GameWorldObject o)
+        {
+            if(gameObjects == null)
+            {
+                gameObjects = new LinkedList<GameWorldObject>();
+            }
+            gameObjects.AddLast(o);
+        }
 
+        public void removePhysicsObject(int id)
+        {
+            foreach(GameWorldObject g  in gameObjects.Where(x => x.Id == id))
+                {
+                    gameObjects.Remove(g);
+                }
+        }
     }
 }

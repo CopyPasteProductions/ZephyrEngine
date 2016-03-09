@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Engine.Physics.Action.Interfaces;
+using Engine.Physics.Collision.Interfaces;
+
 namespace Engine.Physics
 {
-    public interface IPhysics : IUpdateable
+    public interface IPhysics : IUpdateable, ICollidable
     {        
         void addMovement(IMovement m);
 
@@ -16,6 +18,6 @@ namespace Engine.Physics
 
         void processFrame(GameTime gameTime);
 
-
+        IOnCollision getCollisionAction();
     }
 }

@@ -9,7 +9,13 @@ namespace Engine.Physics.Collision.Interfaces
    
     public interface CollisionBody : IMoveable 
     {
-        
+     
+        int Left {get;  }
+           
+        int Right{ get; }
+        int Top { get;  }
+        int Bottom { get; }
+
         bool isCollisionActive();
 
         bool isColliding(CollisionBody c);

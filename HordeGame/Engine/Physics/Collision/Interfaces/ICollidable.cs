@@ -20,6 +20,6 @@ namespace Engine.Physics.Collision.Interfaces
 
         CollisionBody getCollisionBody();
 
-        void moveBody(Vector2 movement);
+      
     }
 }
