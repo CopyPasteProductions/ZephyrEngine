@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Engine.StateManagement.EntityManagement;
 using Engine.InputManager;
 using Engine.Graphics.Renderer;
-
+using Engine.Physics.Process;
 namespace HordeGame.StateManagement
 {
     public class TestGameState : IGameState
@@ -17,9 +17,11 @@ namespace HordeGame.StateManagement
         const string GAME_TEST = "test";
         private EntityManager entityManager;
         private GraphicsRenderer render;
+        private PhysicsProcessor processor;
 
         public TestGameState(EntityManager e,  GraphicsRenderer g)
         {
+            this.processor = new PhysicsProcessor();
             this.entityManager = e;
             this.render = g;
         }
@@ -70,10 +72,25 @@ namespace HordeGame.StateManagement
                
             }
 
+            foreach (IEntity e in entityManager.getCollidables())
+            {
+                var col = e.Collidable;
+                if (col.isActive())
+                {
+                    processor.registerPhysicsObject(ref col);
+                }
+            }
+
+            processor.processFrame(gameTime);
+
+
+
             foreach (IEntity e in entityManager.getDrawables())
             {
                 render.registerDrawable(e.getDrawable());
             }
+
+          
 
             return null;
         }

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Engine.Graphics.ContentManager;
 using HordeGame.Graphics.ContentManager;
-using HordeGame.Graphics;
+using Engine.Graphics;
 using Engine.Graphics.Renderer;
 using Engine.StateManagement.GameStateManagement;
 using HordeGame.StateManagement;
@@ -77,15 +77,14 @@ namespace HordeGame
             Content = content;
             guy = textureContentManager.getContentById("player");
        
-            sprites = new Sprite[] { new Sprite("player", textureContentManager, 14, 55), new Sprite("player", textureContentManager, 4, 2), new Sprite("player", textureContentManager, 10, 12), new Sprite("player", textureContentManager, 60, 17)};
+            sprites = new Sprite[] { new Sprite("player"), new Sprite("player"), new Sprite("player"), new Sprite("player")};
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Engine.Graphics.SpriteBatchSingleton.setSpriteBatch(spriteBatch);
 
             foreach (Sprite s in sprites)
             {
-                s.printTargetLocation();
-                entityManager.addEntity(new ConcreteEntity(s, null, null));
+               entityManager.addEntity(new ConcreteEntity(s, null, null));
             }
 
             // TODO: use this.Content to load your game content here

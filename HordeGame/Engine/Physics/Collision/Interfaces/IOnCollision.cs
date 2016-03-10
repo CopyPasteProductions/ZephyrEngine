@@ -9,7 +9,7 @@ namespace Engine.Physics.Collision.Interfaces
 {
     public interface IOnCollision
     {
-
+        //adds movement to both IPhysics objects.
         void onCollision(IPhysics currentUpdateBody, IPhysics bodyHitting);
 
     }

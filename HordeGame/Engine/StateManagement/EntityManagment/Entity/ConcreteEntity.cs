@@ -8,6 +8,7 @@ using Engine.Physics;
 using Engine.Physics.Collision;
 using Engine.StateManagement.EntityManagement.Entity;
 using Engine.Physics.Movement;
+using Engine.Graphics;
 
 namespace Engine.StateManagement.EntityManagement.Entity
 {
@@ -23,12 +24,12 @@ namespace Engine.StateManagement.EntityManagement.Entity
         //that we can put any sort of game element in
 
 
-        IDrawable drawable;
+        Sprite drawable;
         IUpdateable updatable;
-        IPhysics gameWorldRepresentation;
+        GameWorldObject gameWorldRepresentation;
 
         //encapsulations
-        public IDrawable Drawable
+        public Sprite Drawable
         {
             get
             {
@@ -54,7 +55,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
             }
         }
 
-        public IPhysics Collidable
+        public GameWorldObject Collidable
         {
             get
             {
@@ -67,7 +68,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
             }
         }
 
-        public ConcreteEntity(IDrawable drwbl, IUpdateable updble, IPhysics colidble)
+        public ConcreteEntity(Sprite drwbl, IUpdateable updble, GameWorldObject colidble)
         {
             //pretty standard stuff here
             Drawable = drwbl;

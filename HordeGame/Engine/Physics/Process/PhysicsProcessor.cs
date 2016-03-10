@@ -11,6 +11,10 @@ namespace Engine.Physics.Process
     {
         LinkedList<GameWorldObject> gameObjects;
 
+        public PhysicsProcessor()
+        {
+            gameObjects = new LinkedList<GameWorldObject>();
+        }
 
         public void clear()
         {
@@ -20,11 +24,40 @@ namespace Engine.Physics.Process
         public void processFrame(GameTime gameTime)
         {
             gameObjects.OrderBy(x => x.UpdateOrder);
-
+            //pre move before checking collisions
             foreach (GameWorldObject g in gameObjects)
             {
                 g.processFrame(gameTime);
+                
             }
+
+            foreach (GameWorldObject g in gameObjects)
+            {
+                foreach (GameWorldObject o in gameObjects)
+                {
+                    if (g == o)
+                    {
+                        continue;
+                    }
+                    else if (g.checkCollision(o))
+                    {
+                        var col = g.getCollisionAction();
+                        if (col != null)
+                        {
+                            col.onCollision(g, o);
+                        }
+                        else
+                        {
+                            //do nothing
+                        }
+                        
+                    }
+
+
+                }
+
+            }
+            
 
         }
 

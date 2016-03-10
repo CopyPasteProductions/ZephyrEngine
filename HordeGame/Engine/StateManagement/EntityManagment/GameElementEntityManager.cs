@@ -63,7 +63,17 @@ namespace Engine.StateManagement.EntityManagement
 
         Queue<IEntity> EntityManager.getCollidables()
         {
-            throw new NotImplementedException();
+            Queue<IEntity> qEntities = new Queue<IEntity>();
+            //I feel like I should be able to use lamda here
+            foreach (IEntity e in entities.Values)
+            {
+                if (e.isCollidable())
+                {
+                    qEntities.Enqueue(e);
+                }
+            }
+            //its okay if these are readonly ie return byval
+            return qEntities;
         }
 
         Queue<IEntity> EntityManager.getDrawables()

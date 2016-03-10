@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Engine.StateManagement.EntityManagement.Entity;
+using Engine.Physics;
 
 namespace Engine.StateManagement.EntityManagement.Entity
 {
@@ -38,6 +39,21 @@ namespace Engine.StateManagement.EntityManagement.Entity
                 return myIdentifier;
             }
                         
+        }
+
+       
+
+        public GameWorldObject Collidable
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public virtual bool isCollidable()
