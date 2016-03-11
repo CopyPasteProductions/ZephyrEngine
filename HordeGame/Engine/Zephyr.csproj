@@ -51,6 +51,7 @@
     <Compile Include="InputManager\IInputManager.cs" />
     <Compile Include="InputManager\InputType\IInputEvent.cs" />
     <Compile Include="InputManager\InputType\KeyboardInputEvent.cs" />
+    <Compile Include="Physics\Action\ComplexMovement.cs" />
     <Compile Include="Physics\Action\Interfaces\IAction.cs" />
     <Compile Include="Physics\Action\Interfaces\IMovement.cs" />
     <Compile Include="Physics\Action\StopBodyAction.cs" />

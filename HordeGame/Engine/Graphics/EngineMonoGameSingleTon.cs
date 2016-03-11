@@ -18,7 +18,7 @@ namespace Engine.Graphics
 
         }
 
-        public static void init(Microsoft.Xna.Framework.Content.ContentManager contenManager)
+        public static void init(ref Microsoft.Xna.Framework.Content.ContentManager contenManager)
         {
             contentManager = contenManager;
         }

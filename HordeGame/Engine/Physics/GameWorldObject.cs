@@ -15,6 +15,7 @@ namespace Engine.Physics
     /// </summary>
     public class GameWorldObject : IPhysics
     {
+
         int id;
 
         CollisionBody c;
@@ -67,6 +68,13 @@ namespace Engine.Physics
                 c.move();
             }
 
+        }
+
+        public GameWorldObject(CollisionBody ioc, IOnCollision ionC, IMovement m)
+        {
+            c = ioc;
+            onCol = ionC;
+            movement = m;
         }
 
         public void Update(GameTime gameTime)

@@ -60,6 +60,7 @@ namespace Engine.Physics.Collision
             this.collidable = collidable;
         }
 
+
         public bool isColliding(CollisionBody c)
         {
             foreach(Rectangle r in c.getGeometry())

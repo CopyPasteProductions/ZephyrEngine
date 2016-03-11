@@ -61,8 +61,13 @@ namespace Engine.Graphics
 
         public void Draw(GameTime gameTime)
         {
-            //if(visible)
-            //SpriteBatchSingleton.SingleSpriteBatch.Draw(ContentManager.ContentMangerSingleton.Textures.getContentById(textureName), getDrawLocation(), Color.White);
+            if (visible)
+            {
+                var text = ContentManager.ContentMangerSingleton.Textures.getContentById(textureName);
+               
+                    SpriteBatchSingleton.SingleSpriteBatch.Draw(text, getDrawLocation(), Color.White);
+                
+            }
         }
         //TODO: Implement tinting logic.
 

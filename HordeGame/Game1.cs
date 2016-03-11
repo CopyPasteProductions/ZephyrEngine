@@ -9,6 +9,8 @@ using Engine.StateManagement.GameStateManagement;
 using HordeGame.StateManagement;
 using Engine.StateManagement.EntityManagement;
 using Engine.StateManagement.EntityManagement.Entity;
+using Engine.Physics;
+using Engine.Physics.Collision;
 
 namespace HordeGame
 {
@@ -45,8 +47,11 @@ namespace HordeGame
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            var cont = Content;
             gameManager = new ConcreteGameStateManager("test");
             entityManager = new GameElementEntityManager();
+            EngineMonoGameSingleTon.init(ref cont);
+            Content = cont;
         }
 
         /// <summary>
@@ -72,7 +77,7 @@ namespace HordeGame
         protected override void LoadContent()
         {
             var content = Content;
-            textureContentManager = new GenericContentManager<Texture2D>(ref content);
+            textureContentManager = ContentMangerSingleton.Textures;
             new HordeGameContentLoader(ref textureContentManager).load();
             Content = content;
             guy = textureContentManager.getContentById("player");
@@ -84,6 +89,13 @@ namespace HordeGame
 
             foreach (Sprite s in sprites)
             {
+                SimpleCollisionBody body = new SimpleCollisionBody(new Rectangle(0,0, 64, 64), true);
+
+
+                //GameWorldObject o = new GameWorldObject(body,);
+
+
+
                entityManager.addEntity(new ConcreteEntity(s, null, null));
             }
 

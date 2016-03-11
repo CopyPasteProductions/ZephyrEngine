@@ -44,7 +44,7 @@ namespace Engine.Physics.Process
                         var col = g.getCollisionAction();
                         if (col != null)
                         {
-                            col.onCollision(g, o);
+                            col.onCollision(g, o, gameTime);
                         }
                         else
                         {

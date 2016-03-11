@@ -17,6 +17,11 @@ namespace HordeGame.Physics
         {
             this.side = side;
         }
+
+        public ColisionWithEdgeScreen()
+        {
+        }
+
         public void performAction(CollisionBody c, GameTime gameTime)
         {
             var acceleration = c.getAcceleration();
