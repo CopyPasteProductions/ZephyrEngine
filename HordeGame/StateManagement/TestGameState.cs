@@ -34,6 +34,7 @@ namespace HordeGame.StateManagement
         public void draw(GameTime gameTime)
         {
             render.batchDraw(gameTime);
+
         }
 
         public string getName()
@@ -61,9 +62,19 @@ namespace HordeGame.StateManagement
         {
             throw new NotImplementedException();
         }
-
+        double lastDrawGameTime = 0.0;
         public IGameStateTransition updateState(GameTime gameTime)
-        { 
+        {
+            var currentGameTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+            System.Console.WriteLine("Current draw" + currentGameTime);
+            System.Console.WriteLine("last " + lastDrawGameTime);
+            if (currentGameTime - lastDrawGameTime > 25 )
+            {
+               
+          
+          
+
             foreach (IEntity u in entityManager.getUpdatables())
             {
                 IUpdateable element = u.getUpdatable();
@@ -74,19 +85,23 @@ namespace HordeGame.StateManagement
 
             foreach (IEntity e in entityManager.getCollidables())
             {
+                Console.WriteLine("Have Physics Objects");
                 var col = e.Collidable;
                 if (col.isActive())
                 {
                     processor.registerPhysicsObject(ref col);
                 }
             }
-
+            Console.WriteLine("Processing game physics");
             processor.processFrame(gameTime);
 
+                lastDrawGameTime = gameTime.TotalGameTime.TotalMilliseconds;
+            }
 
 
             foreach (IEntity e in entityManager.getDrawables())
             {
+                Console.WriteLine("Found drawable");
                 render.registerDrawable(e.getDrawable());
             }
 

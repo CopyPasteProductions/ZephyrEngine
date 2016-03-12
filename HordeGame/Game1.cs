@@ -11,7 +11,8 @@ using Engine.StateManagement.EntityManagement;
 using Engine.StateManagement.EntityManagement.Entity;
 using Engine.Physics;
 using Engine.Physics.Collision;
-
+using Engine.Physics.Action;
+using HordeGame.Physics.Action;
 namespace HordeGame
 {
     /// <summary>
@@ -90,15 +91,16 @@ namespace HordeGame
             foreach (Sprite s in sprites)
             {
                 SimpleCollisionBody body = new SimpleCollisionBody(new Rectangle(0,0, 64, 64), true);
+                var oc = new Physics.OnCollisionScreenEdge();
+                var m = new ComplexMovement();
+                m.addAction(new MoveRandomDirectionAction());
+                GameWorldObject o = new GameWorldObject(body, oc, m );
 
 
-                //GameWorldObject o = new GameWorldObject(body,);
 
-
-
-               entityManager.addEntity(new ConcreteEntity(s, null, null));
+               entityManager.addEntity(new ConcreteEntity(s, null, o));
             }
-
+           
             // TODO: use this.Content to load your game content here
         }
 
@@ -110,7 +112,7 @@ namespace HordeGame
         {
             // TODO: Unload any non ContentManager content here
         }
-
+        double lastGameTime = 0;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -120,13 +122,16 @@ namespace HordeGame
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            gameManager.updateActiveGameState(gameTime);
-            
-            // TODO: Add your update logic here
+          
+         
+                gameManager.updateActiveGameState(gameTime);
+                lastGameTime = gameTime.TotalGameTime.TotalMilliseconds;
+        
 
+            
             base.Update(gameTime);
         }
-
+        double lastDrawGameTime = 0.0;
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -134,7 +139,10 @@ namespace HordeGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+
             gameManager.drawGameStateComponents(gameTime);
+                lastDrawGameTime = gameTime.TotalGameTime.TotalMilliseconds;
             
             // TODO: Add your drawing code here
 
