@@ -24,6 +24,8 @@ namespace Engine.Physics
 
         IMovement movement;
 
+
+
         public bool Enabled
         {
             get
@@ -60,6 +62,7 @@ namespace Engine.Physics
         {
             if (movement.hasNextAction())
             {
+                Console.WriteLine("has next action");
                 movement.processNextAction(c, gameTime);
             }
             else
@@ -115,6 +118,11 @@ namespace Engine.Physics
             //TODO fix thsi
 
             return true;
+        }
+
+        public Rectangle getDrawLocation()
+        {
+           return c.getDrawLocation();
         }
 
         public CollisionBody getCollisionBody()

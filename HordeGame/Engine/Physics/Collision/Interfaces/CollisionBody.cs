@@ -24,6 +24,6 @@ namespace Engine.Physics.Collision.Interfaces
 
         List<Rectangle> getGeometry();
 
-       
+        Rectangle getDrawLocation();
     }
 }

@@ -9,29 +9,42 @@ namespace Engine.Physics.Action
 {
     public class ComplexMovement : IMovement
     {
+        Queue<IAction> actionFrames;
+
+        public ComplexMovement()
+        {
+            actionFrames = new Queue<IAction>();
+        }
+
         public void addAction(IAction a)
         {
-            throw new NotImplementedException();
+            actionFrames.Enqueue(a);
         }
 
         public void clear()
         {
-            throw new NotImplementedException();
+            actionFrames.Clear();
         }
 
         public List<IAction> getMembers()
         {
-            throw new NotImplementedException();
+            //TODO Implement this.
+            return new List<IAction>();
         }
 
         public bool hasNextAction()
         {
-            throw new NotImplementedException();
+            return actionFrames.Count > 0;
         }
 
         public void processNextAction(CollisionBody c, GameTime gameTime)
         {
-            throw new NotImplementedException();
+            //TODO FRAMELOCKING
+            //Lets grab the next action!
+            var action = actionFrames.Dequeue();
+
+            action.performAction(c, gameTime);
+
         }
     }
 }

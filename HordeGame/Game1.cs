@@ -90,7 +90,7 @@ namespace HordeGame
 
             foreach (Sprite s in sprites)
             {
-                SimpleCollisionBody body = new SimpleCollisionBody(new Rectangle(0,0, 64, 64), true);
+                SimpleCollisionBody body = new SimpleCollisionBody(new Rectangle(10, 10, 64, 64), true);
                 var oc = new Physics.OnCollisionScreenEdge();
                 var m = new ComplexMovement();
                 m.addAction(new MoveRandomDirectionAction());
@@ -100,8 +100,14 @@ namespace HordeGame
 
                entityManager.addEntity(new ConcreteEntity(s, null, o));
             }
-           
-            // TODO: use this.Content to load your game content here
+            var width = graphics.GraphicsDevice.Viewport.Width;
+            var height = graphics.GraphicsDevice.Viewport.Height;
+            System.Console.WriteLine(width +" , "+ height);
+            entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, 0, width, 1), true), null, new ComplexMovement())));
+            entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, height, width , 1), true), null, new ComplexMovement())));
+            entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(width, 0, 1, height), true), null, new ComplexMovement())));
+            //entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, 0, 1, graphics.GraphicsDevice.Viewport.Height), true), null, new ComplexMovement())));
+            //// TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -125,7 +131,7 @@ namespace HordeGame
           
          
                 gameManager.updateActiveGameState(gameTime);
-                lastGameTime = gameTime.TotalGameTime.TotalMilliseconds;
+              
         
 
             
@@ -142,7 +148,7 @@ namespace HordeGame
 
 
             gameManager.drawGameStateComponents(gameTime);
-                lastDrawGameTime = gameTime.TotalGameTime.TotalMilliseconds;
+                
             
             // TODO: Add your drawing code here
 

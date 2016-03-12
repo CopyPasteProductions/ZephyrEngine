@@ -55,7 +55,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
             }
         }
 
-        public GameWorldObject Collidable
+        public override GameWorldObject Collidable
         {
             get
             {
@@ -81,7 +81,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
         {
             //okay if we don't have a collidable we know that we
             //can't collide with anything
-            return Collidable != null;
+            return gameWorldRepresentation != null;
         }
 
         public override bool isDrawable()
@@ -100,7 +100,8 @@ namespace Engine.StateManagement.EntityManagement.Entity
 
         public override IDrawable getDrawable()
         {
-            return Drawable;
+            drawable.updateDrawLocation(gameWorldRepresentation.getDrawLocation());
+            return drawable;
         }
 
         public override IUpdateable getUpdatable()

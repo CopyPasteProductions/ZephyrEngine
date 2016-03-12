@@ -33,6 +33,11 @@ namespace HordeGame.StateManagement
 
         public void draw(GameTime gameTime)
         {
+            foreach (IEntity e in entityManager.getDrawables())
+            {
+                Console.WriteLine("Found drawable");
+                render.registerDrawable(e.getDrawable());
+            }
             render.batchDraw(gameTime);
 
         }
@@ -69,7 +74,7 @@ namespace HordeGame.StateManagement
 
             System.Console.WriteLine("Current draw" + currentGameTime);
             System.Console.WriteLine("last " + lastDrawGameTime);
-            if (currentGameTime - lastDrawGameTime > 25 )
+            if (currentGameTime - lastDrawGameTime > 100.0 )
             {
                
           
@@ -99,11 +104,7 @@ namespace HordeGame.StateManagement
             }
 
 
-            foreach (IEntity e in entityManager.getDrawables())
-            {
-                Console.WriteLine("Found drawable");
-                render.registerDrawable(e.getDrawable());
-            }
+      
 
           
 

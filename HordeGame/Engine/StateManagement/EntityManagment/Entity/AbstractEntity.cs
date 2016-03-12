@@ -8,7 +8,7 @@ using Engine.Physics;
 
 namespace Engine.StateManagement.EntityManagement.Entity
 {
-    public class AbstractEntity : IEntity
+    public abstract class AbstractEntity : IEntity
     {
         //Alright we want to start keeping track of the Id for the entity manager.
         int myIdentifier;
@@ -41,20 +41,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
                         
         }
 
-       
-
-        public GameWorldObject Collidable
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public abstract GameWorldObject Collidable { get; set; }
 
         public virtual bool isCollidable()
         {

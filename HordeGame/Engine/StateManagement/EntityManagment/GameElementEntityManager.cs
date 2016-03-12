@@ -61,8 +61,9 @@ namespace Engine.StateManagement.EntityManagement
             return newId;
         }
 
-        Queue<IEntity> EntityManager.getCollidables()
+        public Queue<IEntity> getCollidables()
         {
+
             Queue<IEntity> qEntities = new Queue<IEntity>();
             //I feel like I should be able to use lamda here
             foreach (IEntity e in entities.Values)

@@ -13,7 +13,7 @@ namespace Engine.Graphics
         private bool visible;
         private string textureName;
         private Rectangle destinationRectangle;
-
+        private Texture2D text;
         public Sprite(int initDrawOrder, bool initVis, string textureName, Rectangle initLocation)
         {
             drawOrder = initDrawOrder;
@@ -63,7 +63,8 @@ namespace Engine.Graphics
         {
             if (visible)
             {
-                var text = ContentManager.ContentMangerSingleton.Textures.getContentById(textureName);
+                if(text == null)
+                    text = ContentManager.ContentMangerSingleton.Textures.getContentById(textureName);
                
                     SpriteBatchSingleton.SingleSpriteBatch.Draw(text, getDrawLocation(), Color.White);
                 

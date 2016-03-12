@@ -25,6 +25,9 @@ namespace Engine.Graphics.Renderer
         /// <param name="gameTime"></param>
         public void batchDraw(GameTime gameTime)
         {
+            if(drawTargets == null)
+                return;
+
             var spritebatch = SpriteBatchSingleton.SingleSpriteBatch;
             //order by draw order.  
             //TODO: Verify that this does the proper ordering

@@ -58,6 +58,7 @@ namespace Engine.Physics.Collision
         {
             this.body = body;
             this.collidable = collidable;
+            this.acceleration = Vector2.Zero;
         }
 
 
@@ -131,6 +132,11 @@ namespace Engine.Physics.Collision
         {
             body.X = targetLocation.X;
             body.Y = targetLocation.Y;
+        }
+
+        public Rectangle getDrawLocation()
+        {
+            return body;
         }
     }
 }
