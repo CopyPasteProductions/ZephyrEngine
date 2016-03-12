@@ -63,7 +63,7 @@ namespace Engine.Physics
             if (movement.hasNextAction())
             {
                 Console.WriteLine("has next action");
-                movement.processNextAction(c, gameTime);
+                movement.processNextAction(ref c, gameTime);
             }
             else
             {

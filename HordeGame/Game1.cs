@@ -106,7 +106,7 @@ namespace HordeGame
             entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, 0, width, 1), true), null, new ComplexMovement())));
             entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, height, width , 1), true), null, new ComplexMovement())));
             entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(width, 0, 1, height), true), null, new ComplexMovement())));
-            //entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, 0, 1, graphics.GraphicsDevice.Viewport.Height), true), null, new ComplexMovement())));
+            entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, 0, 1, height), true), null, new ComplexMovement())));
             //// TODO: use this.Content to load your game content here
         }
 

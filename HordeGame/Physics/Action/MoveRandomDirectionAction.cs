@@ -10,10 +10,10 @@ namespace HordeGame.Physics.Action
 {
     public class MoveRandomDirectionAction : IAction
     {
-        public void performAction(CollisionBody c, GameTime gameTime)
+        public void performAction(ref CollisionBody c, GameTime gameTime)
         {
             Random random = new Random();
-            var accelleration = new Vector2(random.Next(2), random.Next(2));
+            var accelleration = new Vector2(0, 4);
             Console.WriteLine(accelleration);
             c.addAcceleration(accelleration);
 

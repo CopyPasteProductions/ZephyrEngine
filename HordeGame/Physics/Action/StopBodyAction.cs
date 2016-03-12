@@ -13,7 +13,7 @@ namespace HordeGame.Physics.Action
 {
     public class StopBodyAction : IAction
     {
-        public void performAction(CollisionBody c, GameTime gameTime)
+        public void performAction(ref CollisionBody c, GameTime gameTime)
         {
             throw new NotImplementedException();
         }

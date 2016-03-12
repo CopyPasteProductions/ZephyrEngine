@@ -37,13 +37,13 @@ namespace Engine.Physics.Action
             return actionFrames.Count > 0;
         }
 
-        public void processNextAction(CollisionBody c, GameTime gameTime)
+        public void processNextAction(ref CollisionBody c, GameTime gameTime)
         {
             //TODO FRAMELOCKING
             //Lets grab the next action!
             var action = actionFrames.Dequeue();
 
-            action.performAction(c, gameTime);
+            action.performAction(ref c, gameTime);
 
         }
     }

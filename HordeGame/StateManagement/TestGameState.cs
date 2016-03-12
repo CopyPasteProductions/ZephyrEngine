@@ -74,7 +74,7 @@ namespace HordeGame.StateManagement
 
             System.Console.WriteLine("Current draw" + currentGameTime);
             System.Console.WriteLine("last " + lastDrawGameTime);
-            if (currentGameTime - lastDrawGameTime > 100.0 )
+            if (currentGameTime - lastDrawGameTime > 17 )
             {
                
           
@@ -87,9 +87,10 @@ namespace HordeGame.StateManagement
                 element.Update(gameTime);
                
             }
-
-            foreach (IEntity e in entityManager.getCollidables())
+                processor.clear();
+                foreach (IEntity e in entityManager.getCollidables())
             {
+                    
                 Console.WriteLine("Have Physics Objects");
                 var col = e.Collidable;
                 if (col.isActive())

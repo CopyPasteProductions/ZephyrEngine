@@ -22,18 +22,22 @@ namespace HordeGame.Physics
         {
         }
 
-        public void performAction(CollisionBody c, GameTime gameTime)
+        public void performAction(ref CollisionBody c, GameTime gameTime)
         {
             var acceleration = c.getAcceleration();
 
             Vector2 sideVector;
+            Console.WriteLine(side);
             switch (side)
             {
                 case ScreenSide.TOP:
                     sideVector = new Vector2(1, 0);
                     break;
                 case ScreenSide.BOT:
-                    sideVector = new Vector2(1, 0);
+                  acceleration = new Vector2(acceleration.X,  -1 * acceleration.Y);
+
+                    Console.WriteLine("Acceleration after change: " + acceleration);
+                    c.setAcceleration(acceleration);
                     break;
                 case ScreenSide.LEFT:
                     sideVector = new Vector2(0,1);
@@ -45,10 +49,8 @@ namespace HordeGame.Physics
                     sideVector = Vector2.Zero;
                     break;
             }
-
-            var result = Vector2.Reflect(acceleration, sideVector);
-
-            c.setAcceleration(result);
+      
+           
         }
     }
 }

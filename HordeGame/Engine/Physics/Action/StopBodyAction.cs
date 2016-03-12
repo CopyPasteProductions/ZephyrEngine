@@ -14,7 +14,7 @@ namespace Engine.Physics.Action
     {
 
 
-        public void performAction(CollisionBody c, GameTime gameTime)
+        public void performAction(ref CollisionBody c, GameTime gameTime)
         {
             c.resetAcceleration();
         }

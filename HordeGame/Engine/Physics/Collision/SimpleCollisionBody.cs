@@ -108,6 +108,7 @@ namespace Engine.Physics.Collision
 
         public void setAcceleration(Vector2 moveVector)
         {
+            Console.WriteLine("Setting Acceleration: " + moveVector);
             acceleration = moveVector;
         }
 

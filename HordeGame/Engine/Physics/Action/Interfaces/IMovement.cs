@@ -9,7 +9,7 @@ namespace Engine.Physics.Action.Interfaces
 {
     public interface IMovement
     {
-        void processNextAction(CollisionBody c, GameTime gameTime);
+        void processNextAction(ref CollisionBody c, GameTime gameTime);
 
         bool hasNextAction();
 

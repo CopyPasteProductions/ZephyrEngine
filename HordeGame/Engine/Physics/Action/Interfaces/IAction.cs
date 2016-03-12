@@ -11,7 +11,7 @@ namespace Engine.Physics.Action.Interfaces
 {
     public interface IAction
     {
-        void performAction(CollisionBody c, GameTime gameTime);
+        void performAction(ref CollisionBody c, GameTime gameTime);
        
     }
 }
