@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Engine.StateManagement.EntityManagement;
 using Engine.InputManager;
 using Engine.Graphics.Renderer;
-
+using Engine.Physics.Process;
 namespace HordeGame.StateManagement
 {
     public class TestGameState : IGameState
@@ -17,9 +17,11 @@ namespace HordeGame.StateManagement
         const string GAME_TEST = "test";
         private EntityManager entityManager;
         private GraphicsRenderer render;
+        private PhysicsProcessor processor;
 
         public TestGameState(EntityManager e,  GraphicsRenderer g)
         {
+            this.processor = new PhysicsProcessor();
             this.entityManager = e;
             this.render = g;
         }
@@ -31,7 +33,13 @@ namespace HordeGame.StateManagement
 
         public void draw(GameTime gameTime)
         {
+            foreach (IEntity e in entityManager.getDrawables())
+            {
+                Console.WriteLine("Found drawable");
+                render.registerDrawable(e.getDrawable());
+            }
             render.batchDraw(gameTime);
+
         }
 
         public string getName()
@@ -59,9 +67,19 @@ namespace HordeGame.StateManagement
         {
             throw new NotImplementedException();
         }
-
+        double lastDrawGameTime = 0.0;
         public IGameStateTransition updateState(GameTime gameTime)
-        { 
+        {
+            var currentGameTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+            System.Console.WriteLine("Current draw" + currentGameTime);
+            System.Console.WriteLine("last " + lastDrawGameTime);
+            if (currentGameTime - lastDrawGameTime > 17 )
+            {
+               
+          
+          
+
             foreach (IEntity u in entityManager.getUpdatables())
             {
                 IUpdateable element = u.getUpdatable();
@@ -69,11 +87,27 @@ namespace HordeGame.StateManagement
                 element.Update(gameTime);
                
             }
-
-            foreach (IEntity e in entityManager.getDrawables())
+                processor.clear();
+                foreach (IEntity e in entityManager.getCollidables())
             {
-                render.registerDrawable(e.getDrawable());
+                    
+                Console.WriteLine("Have Physics Objects");
+                var col = e.Collidable;
+                if (col.isActive())
+                {
+                    processor.registerPhysicsObject(ref col);
+                }
             }
+            Console.WriteLine("Processing game physics");
+            processor.processFrame(gameTime);
+
+                lastDrawGameTime = gameTime.TotalGameTime.TotalMilliseconds;
+            }
+
+
+      
+
+          
 
             return null;
         }

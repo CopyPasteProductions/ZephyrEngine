@@ -8,19 +8,23 @@ namespace Engine.Physics.Movement
 {
     public interface IMoveable
     {
-        Vector2 getMoveVector();
+        Vector2 getAcceleration();
         /// <summary>
         /// Adds to the movement vector
         /// </summary>
         /// <param name="moveVector">Adds to the movement vector </param>
-        void addMovement(Vector2 moveVector);
+        void setAcceleration(Vector2 moveVector);
         /// <summary>
         /// Sets the movement vector to Zero
         /// </summary>
-        void stopMovement();
+        void resetAcceleration();
         /// <summary>
-        /// Moves the collision body based on the movement vector
+        /// Moves based on the movement vector
         /// </summary>
-        void step();
+        void move();
+
+        void setPosition(Point targetLocation);
+
+        void addAcceleration(Vector2 accelerationFactor);
     }
 }

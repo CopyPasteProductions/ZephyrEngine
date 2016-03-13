@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Engine.Physics;
 
 namespace Engine.StateManagement.EntityManagement.Entity
 {
@@ -26,7 +27,7 @@ namespace Engine.StateManagement.EntityManagement.Entity
         //The thing is that position is required for all updates and colisions and even drawing.
         //position of the entity in the game world.
         // Point Position { get; set; }
-
+        
         //Does this entity require updating?
         bool isUpdatable();
 
@@ -46,5 +47,9 @@ namespace Engine.StateManagement.EntityManagement.Entity
 
         //we need to be able to update the compenents of the entity
         void UpdateEntity(GameTime gameTime);
+
+        GameWorldObject Collidable { get; set; }
+
+
     }
 }

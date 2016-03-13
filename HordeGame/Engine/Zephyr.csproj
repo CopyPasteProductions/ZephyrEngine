@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Graphics\ContentManager\ContentMangerSingleton.cs" />
     <Compile Include="Graphics\ContentManager\GenericContentManager.cs" />
     <Compile Include="Graphics\ContentManager\IGameContentManager.cs" />
+    <Compile Include="Graphics\EngineMonoGameSingleTon.cs" />
     <Compile Include="Graphics\Renderer\GraphicsQueueRenderer.cs" />
     <Compile Include="Graphics\Renderer\GraphicsRenderer.cs" />
     <Compile Include="Graphics\Sprite.cs" />
@@ -49,15 +51,21 @@
     <Compile Include="InputManager\IInputManager.cs" />
     <Compile Include="InputManager\InputType\IInputEvent.cs" />
     <Compile Include="InputManager\InputType\KeyboardInputEvent.cs" />
-    <Compile Include="Physics\Action\IAction.cs" />
-    <Compile Include="Physics\Action\IMovement.cs" />
+    <Compile Include="Physics\Action\ComplexMovement.cs" />
+    <Compile Include="Physics\Action\Interfaces\IAction.cs" />
+    <Compile Include="Physics\Action\Interfaces\IMovement.cs" />
     <Compile Include="Physics\Action\StopBodyAction.cs" />
-    <Compile Include="Physics\Collision\CollisionBody.cs" />
-    <Compile Include="Physics\Collision\ICollidable.cs" />
-    <Compile Include="Physics\Collision\RectangleCollisionBody.cs" />
+    <Compile Include="Physics\Helpers\CollisionHelper.cs" />
+    <Compile Include="Physics\Collision\Interfaces\CollisionBody.cs" />
+    <Compile Include="Physics\Collision\Interfaces\ICollidable.cs" />
+    <Compile Include="Physics\Collision\Interfaces\IOnCollision.cs" />
+    <Compile Include="Physics\Collision\SimpleCollisionBody.cs" />
+    <Compile Include="Physics\GameWorldObject.cs" />
+    <Compile Include="Physics\IPhysics.cs" />
     <Compile Include="Physics\MovableRectangleCollisionBody.cs" />
     <Compile Include="Physics\Movement\IMoveable.cs" />
-    <Compile Include="Physics\PhysicsProcessor.cs" />
+    <Compile Include="Physics\Process\Interfaces\IPhysicsProcessor.cs" />
+    <Compile Include="Physics\Process\PhysicsProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateManagement\EntityManagment\EntityManager.cs" />
     <Compile Include="StateManagement\EntityManagment\Entity\AbstractEntity.cs" />
@@ -70,7 +78,6 @@
     <Compile Include="StateManagement\GameStateManagement\StateTransition\IGameStateTransition.cs" />
     <Compile Include="StateManagement\GameStateManagement\State\IGameState.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

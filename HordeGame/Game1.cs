@@ -3,13 +3,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Engine.Graphics.ContentManager;
 using HordeGame.Graphics.ContentManager;
-using HordeGame.Graphics;
+using Engine.Graphics;
 using Engine.Graphics.Renderer;
 using Engine.StateManagement.GameStateManagement;
 using HordeGame.StateManagement;
 using Engine.StateManagement.EntityManagement;
 using Engine.StateManagement.EntityManagement.Entity;
-
+using Engine.Physics;
+using Engine.Physics.Collision;
+using Engine.Physics.Action;
+using HordeGame.Physics.Action;
 namespace HordeGame
 {
     /// <summary>
@@ -45,8 +48,11 @@ namespace HordeGame
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            var cont = Content;
             gameManager = new ConcreteGameStateManager("test");
             entityManager = new GameElementEntityManager();
+            EngineMonoGameSingleTon.init(ref cont);
+            Content = cont;
         }
 
         /// <summary>
@@ -72,23 +78,36 @@ namespace HordeGame
         protected override void LoadContent()
         {
             var content = Content;
-            textureContentManager = new GenericContentManager<Texture2D>(ref content);
+            textureContentManager = ContentMangerSingleton.Textures;
             new HordeGameContentLoader(ref textureContentManager).load();
             Content = content;
             guy = textureContentManager.getContentById("player");
        
-            sprites = new Sprite[] { new Sprite("player", textureContentManager, 14, 55), new Sprite("player", textureContentManager, 4, 2), new Sprite("player", textureContentManager, 10, 12), new Sprite("player", textureContentManager, 60, 17)};
+            sprites = new Sprite[] { new Sprite("player"), new Sprite("player"), new Sprite("player"), new Sprite("player")};
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Engine.Graphics.SpriteBatchSingleton.setSpriteBatch(spriteBatch);
 
             foreach (Sprite s in sprites)
             {
-                s.printTargetLocation();
-                entityManager.addEntity(new ConcreteEntity(s, null, null));
-            }
+                SimpleCollisionBody body = new SimpleCollisionBody(new Rectangle(10, 10, 64, 64), true);
+                var oc = new Physics.OnCollisionScreenEdge();
+                var m = new ComplexMovement();
+                m.addAction(new MoveRandomDirectionAction());
+                GameWorldObject o = new GameWorldObject(body, oc, m );
 
-            // TODO: use this.Content to load your game content here
+
+
+               entityManager.addEntity(new ConcreteEntity(s, null, o));
+            }
+            var width = graphics.GraphicsDevice.Viewport.Width;
+            var height = graphics.GraphicsDevice.Viewport.Height;
+            System.Console.WriteLine(width +" , "+ height);
+            entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, 0, width, 1), true), null, new ComplexMovement())));
+            entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, height, width , 1), true), null, new ComplexMovement())));
+            entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(width, 0, 1, height), true), null, new ComplexMovement())));
+            entityManager.addEntity(new ConcreteEntity(null, null, new GameWorldObject(new SimpleCollisionBody(new Rectangle(0, 0, 1, height), true), null, new ComplexMovement())));
+            //// TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -99,7 +118,7 @@ namespace HordeGame
         {
             // TODO: Unload any non ContentManager content here
         }
-
+        double lastGameTime = 0;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -109,13 +128,16 @@ namespace HordeGame
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            gameManager.updateActiveGameState(gameTime);
-            
-            // TODO: Add your update logic here
+          
+         
+                gameManager.updateActiveGameState(gameTime);
+              
+        
 
+            
             base.Update(gameTime);
         }
-
+        double lastDrawGameTime = 0.0;
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -123,7 +145,10 @@ namespace HordeGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+
             gameManager.drawGameStateComponents(gameTime);
+                
             
             // TODO: Add your drawing code here
 

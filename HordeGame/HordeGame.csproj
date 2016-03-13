@@ -57,7 +57,10 @@
     <Compile Include="Graphics\ContentManager\HordeGameContentLoader.cs" />
     <Compile Include="Graphics\Sprite.cs" />
     <Compile Include="Graphics\SpriteBatchSingleton.cs" />
+    <Compile Include="Physics\Action\MoveRandomDirectionAction.cs" />
     <Compile Include="Physics\Action\StopBodyAction.cs" />
+    <Compile Include="Physics\ColisionWithEdgeScreen.cs" />
+    <Compile Include="Physics\OnCollisionScreenEdge.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateManagement\TestGameState.cs" />

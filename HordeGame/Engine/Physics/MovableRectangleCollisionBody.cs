@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Engine.Physics
 {
-    public class MovableRectangleCollisionBody : RectangleCollisionBody, IMoveable
+    public class MovableRectangleCollisionBody : SimpleCollisionBody, IMoveable
     {
         Vector2 moveVector;
 
@@ -19,23 +19,23 @@ namespace Engine.Physics
 
 
         
-        public Vector2 getMoveVector()
+        public Vector2 getAcceleration()
         {
             return moveVector;
         }
 
-        public void addMovement(Vector2 moveVector)
+        public void setAcceleration(Vector2 moveVector)
         {
             this.moveVector += moveVector;
         }
 
-        public void step()
+        public void move()
         {
             body.X += (int)moveVector.X;
             body.Y += (int)moveVector.Y;
         }
 
-        public void stopMovement()
+        public void resetAcceleration()
         {
             this.moveVector = Vector2.Zero;
         }

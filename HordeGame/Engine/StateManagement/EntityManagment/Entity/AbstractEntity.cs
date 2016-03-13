@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Engine.StateManagement.EntityManagement.Entity;
+using Engine.Physics;
 
 namespace Engine.StateManagement.EntityManagement.Entity
 {
-    public class AbstractEntity : IEntity
+    public abstract class AbstractEntity : IEntity
     {
         //Alright we want to start keeping track of the Id for the entity manager.
         int myIdentifier;
@@ -39,6 +40,8 @@ namespace Engine.StateManagement.EntityManagement.Entity
             }
                         
         }
+
+        public abstract GameWorldObject Collidable { get; set; }
 
         public virtual bool isCollidable()
         {
